@@ -25,6 +25,7 @@ public class RemoteWebDriverTest {
         capability.setBrowserName("chrome");
         capability.setPlatform(Platform.LINUX);
         driver = new RemoteWebDriver(new URL(nodeURL), capability);
+        driver.manage().window().maximize();
     }
 
     @AfterTest
@@ -50,5 +51,24 @@ public class RemoteWebDriverTest {
     OutputStream os=new FileOutputStream(newFile);
 		os.write(fname);
 		os.close();
+    }
+    @Test
+    public void sampleTest2() throws IOException {
+        driver.get("http://www.google.co.in");
+
+        if (driver.getPageSource().contains("Search")) {
+            Assert.assertTrue(true, "Mobile Testing Link Found");
+        } else {
+            Assert.assertTrue(false, "Failed: Link not found");
+        }
+
+        System.out.println(driver.getTitle());
+
+        String projectPath= System.getProperty("user.dir");
+        File newFile = new File(projectPath+"/screenshots/screenshot+"+System.currentTimeMillis()+".png");
+        byte[] fname = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        OutputStream os=new FileOutputStream(newFile);
+        os.write(fname);
+        os.close();
     }
 }
