@@ -16,12 +16,14 @@ public class TestRunnerMain {
 
     public static void main(String [] args) throws IOException {
         ReportPortalTestNGListener listener = new ReportPortalTestNGListener();
-        TestNG testNg = new TestNG();
-        List<String> lSuites = Lists.newArrayList();
+        TestNG testSuite = new TestNG();
         ImmutableSet<ClassPath.ClassInfo> classes= ClassPath.from(TestRunnerMain.class.getClassLoader())
                 .getTopLevelClasses("com.tests");
         System.out.println(classes.toString());
         Class [] c= classes.stream().map(ClassPath.ClassInfo::load).toArray(Class[]::new);
+        testSuite.setTestClasses(c);
+        testSuite.setGroups(args[0]);
+        testSuite.run();
 
     }
 }
