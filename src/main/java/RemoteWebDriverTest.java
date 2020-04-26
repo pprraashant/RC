@@ -20,7 +20,7 @@ public class RemoteWebDriverTest {
     @BeforeTest
     public void setUp() throws MalformedURLException {
         baseURL = "http://demo.guru99.com/test/guru99home/";
-        nodeURL = "http://0.0.0.0:4444/wd/hub";
+        nodeURL = "http://192.168.99.100:32149/wd/hub";
         DesiredCapabilities capability = DesiredCapabilities.chrome();
         capability.setBrowserName("chrome");
         capability.setPlatform(Platform.LINUX);
